@@ -1,0 +1,58 @@
+Define Libpub ds6(string_in)=
+Func-
+  Local x,expression,c_neg,c_val,eval_x1,a_val,eval_x2,term_x2,d,v_num,r_val,p,v_str,ans_str
+© DEFINE X AS A LOCAL VARIABLE SO THE FUNCTION CAN SAFELY ASSIGN VALUES TO IT
+© EVALUATE THE STRING AT X=0 TO EXTRACT THE CONSTANT VALUE
+  x:=0
+  expression:=expr(string_in)
+  c_neg:=expression
+  c_val:=-c_neg
+© EVALUATE THE STRING AT X=1 TO ISOLATE THE LEADING COEFFICIENT
+  x:=1
+  expression:=expr(string_in)
+  eval_x1:=expression
+  a_val:=eval_x1+c_val
+© EVALUATE THE STRING AT X=2 TO CAPTURE THE ENTIRE EXPLICIT VARIABLE VALUE
+  x:=2
+  expression:=expr(string_in)
+  eval_x2:=expression
+  term_x2:=eval_x2+c_val
+© USE LOGARITHMS TO EXTRACT THE DEGREE NUMERICALLY WITHOUT AN ALGEBRA SYSTEM
+  d:=log(term_x2/a_val)/log(2)
+© CALCULATE THE EXACT SQUARE ROOTS FOR COACHEFFICIENTS AND CONSTANTS
+  v_num:=√(a_val)
+  r_val:=√(c_val)
+© DIVIDE DEGREE BY TWO TO FIND THE FACTORED EXPONENT POWER
+  p:=d/2
+© CONSTRUCT THE STRING OUTPUT BASED ON THE EXPONENT VALUES
+  If p=0.5 Then
+    If v_num=1 Then
+      v_str:="√(x)"
+    Else
+      v_str:=string(v_num) & "*√(x)"
+    EndIf
+  Else
+    If p=1 Then
+      If v_num=1 Then
+        v_str:="x"
+      Else
+        v_str:=string(v_num) & "*x"
+      EndIf
+    ElseIf fPart(p)≠0 Then
+      If v_num=1 Then
+        v_str:="x^(" & string(p) & ")"
+      Else
+        v_str:=string(v_num) & "*x^(" & string(p) & ")"
+      EndIf
+    Else
+      If v_num=1 Then
+        v_str:="x^" & string(p)
+      Else
+        v_str:=string(v_num) & "*x^" & string(p)
+      EndIf
+    EndIf
+  EndIf
+© BUILD AND RETURN THE FINAL FACTORED STRING REPRESENTATION
+  ans_str:="(" & v_str & " - " & string(r_val) & ")*(" & v_str & " + " & string(r_val) & ")"
+  Return ans_str
+EndFunc
