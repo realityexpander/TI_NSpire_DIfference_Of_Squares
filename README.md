@@ -30,6 +30,7 @@ Since the native non-CAS environment on devices like the TI-Nspire CX II crashes
    $$d = \frac{\log(2^d)}{\log(2)}$$
 
    Original Conversation: https://share.google/aimode/msEE5WEGgUKNCReim
+   Useful for these kinds of problems: https://chatgpt.com/s/t_6aa5830735b081918d9460f409e8b513
 
 ---
 
